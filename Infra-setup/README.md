@@ -22,3 +22,11 @@ To mimic the production environment, we can deploy application in 2 availability
 
 ![image](https://github.com/user-attachments/assets/ba59ce37-160e-475f-b201-3b1bdd557b01)
 
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+I encountered some challenges while trying to apply a k8s yaml files to Minikube. Despite my best efforts, I was unable to successfully run the kubectl apply command, as the Kubernetes configuration files were not being recognized by the kubectl command.
+
+I performed few troubleshooting steps to resolve the issue:
+*Checked the Kubernetes configuration context to ensure that the Minikube context was being used.
+*Verified the permissions on the Kubernetes configuration files and the resource specification file.
+*Attempted to recreate the Minikube cluster to see if that would resolve the issue.
