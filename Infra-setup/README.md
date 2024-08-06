@@ -12,12 +12,13 @@ I have attempted to set up the Minikube on EC2, but faced some technical issues 
 
 ![image](https://github.com/user-attachments/assets/06946e99-bfa8-47b9-a856-48ed6c38dd19)
 
-Network configuration Setup :
+I used bastian server in public subnet to connect to the EC2 in private subnet to install minikube with docker driver. I attempted to create docker webhook to trigger the github workflow once the image is pushed to dockerhub. i have updated imagepullsecrets in the k8s yaml files to pull the images from my docker repository and deploy the files to the kubernetes.
 
-![image](https://github.com/user-attachments/assets/ba59ce37-160e-475f-b201-3b1bdd557b01)
-
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 To mimic the production environment, we can deploy application in 2 availability zone by using an autoscaling group and load balancer for traffic. Deploying the application in private subnet and the requests come through load balancer. The application can connect to internet using NAT gateway.
 
 ![image](https://github.com/user-attachments/assets/8de0941d-7563-46b8-bbfe-a126c1da47d4)
+
+
+![image](https://github.com/user-attachments/assets/ba59ce37-160e-475f-b201-3b1bdd557b01)
 
