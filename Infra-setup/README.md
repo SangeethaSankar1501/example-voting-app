@@ -6,7 +6,7 @@ I have provided necessary access to the services using IAM roles. I have stored 
 
 ![image](https://github.com/user-attachments/assets/3cbc89c9-a4c8-4098-bc33-811990b7426c)
 
-![image](https://github.com/user-attachments/assets/17d583d5-0c44-4d74-8c1f-874d3e2acc88)
+![image](https://github.com/user-attachments/assets/ac4320bb-f7fa-407f-a111-ef53401462f4)
 
 I have attempted to set up the Minikube on EC2, but faced some technical issues that prevented me from completing the deployment.
 
