@@ -1,10 +1,23 @@
 # example infrastructure set-up and application deployment model (CD) 
 
-For the development environment, I have used AWS Codepipeline and Codebuild to build, tag and push the images to docker hub. i have installed K8s cluster in AWS EC2. I am using Githubactions to deploy the k8s manifest files to the K8s. CodePipeline orchestrates the build stage and automatically triggering builds whenever changes are pushed to GitHub repository.  After CodeBuild has successfully built and pushed the images to Docker Hub, GitHub Actions takes over to handle the deployment. I  have set up workflow that apply Kubernetes manifests in git repo to Kubernetes cluster running on AWS EC2.
-
-![image](https://github.com/user-attachments/assets/6597c74c-a4b4-43ea-83d0-34faafbe99e3)
+For the development environment, I have used AWS Codepipeline and Codebuild to build, tag and push the images to docker hub. i have installed K8s cluster in AWS EC2. I am using Githubactions to deploy the k8s manifest files to the K8s. CodePipeline orchestrates the build stage and automatically triggering builds whenever changes are pushed to GitHub repository.  After CodeBuild has successfully built and pushed the images to Docker Hub, GitHub Actions takes over to handle the deployment. I  have set up workflow that apply Kubernetes manifests in git repo to minikube running on AWS EC2.
 
 I have provided necessary access to the services using IAM roles. I have stored docker credentials in SSM Parameter store and provided the codebuild role with SSM access.
 
-To mimic the production environment, we can deploy application in 2 availability zone by using an autoscaling group and load balancer for traffic. Deploying the application in private subnet and the requests come through load balancer. The application can connect to internet using NAT gateway. 
-![alt text](image-1.png)
+![image](https://github.com/user-attachments/assets/3cbc89c9-a4c8-4098-bc33-811990b7426c)
+
+![image](https://github.com/user-attachments/assets/17d583d5-0c44-4d74-8c1f-874d3e2acc88)
+
+I have attempted to set up the Minikube on EC2, but faced some technical issues that prevented me from completing the deployment.
+
+![image](https://github.com/user-attachments/assets/06946e99-bfa8-47b9-a856-48ed6c38dd19)
+
+Network configuration Setup :
+
+![image](https://github.com/user-attachments/assets/ba59ce37-160e-475f-b201-3b1bdd557b01)
+
+
+To mimic the production environment, we can deploy application in 2 availability zone by using an autoscaling group and load balancer for traffic. Deploying the application in private subnet and the requests come through load balancer. The application can connect to internet using NAT gateway.
+
+![image](https://github.com/user-attachments/assets/8de0941d-7563-46b8-bbfe-a126c1da47d4)
+
