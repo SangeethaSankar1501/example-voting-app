@@ -1,0 +1,40 @@
+version: 0.2
+
+env:
+  parameter-store:
+    Docker_Username: "/voting_app/docker/username"
+    Docker_Password: "/voting_app/docker/password"
+    Docker_Url: "/voting_app/docker/dockerurl"
+
+phases:
+  install:
+    commands:
+      - echo "Installing Docker Compose"
+      - sudo apt update
+      - sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+      - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+      - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/do
+      - sudo apt-get update -y
+      - sudo apt-get install -y docker.io
+      - sudo apt-get install -y docker-compose
+      - docker-compose --version
+  build:
+    commands:
+      - echo "logging in to DockerHub"
+      - echo "$Docker_Password" | docker login -u "$Docker_Username" --password-stdin "$Docker_Url"
+      - echo "Building the image"
+      - docker-compose build 
+
+  post_build:
+    commands:
+      - echo "listing built images"
+      - sudo docker images
+      - echo "Tagging the images for Docker Hub"
+      - |
+        for built_image in $(docker images --format "{{.Repository}}:{{.Tag}}"); do
+          docker tag "$built_image" "$Docker_Username/$built_image"
+          echo "Built and tagged image: $Docker_Username/$built_image"
+          docker push "$Docker_Username/$built_image"
+          echo "Pushed $Docker_Username/$built_image to Docker Hub"
+        done
+
